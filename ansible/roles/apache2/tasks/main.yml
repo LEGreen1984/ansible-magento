@@ -1,8 +1,4 @@
 ---
-# - name: updates and upgrades apt
-#   notify: 
-#     - apt-get update
-
 - name: install apache2 Ubuntu
   notify: 
     - apt-get update
