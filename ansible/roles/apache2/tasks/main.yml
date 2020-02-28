@@ -3,14 +3,21 @@
 #   notify: 
 #     - apt-get update
 
-- name: install apache2
-  # notify: 
-  #   - apt-get update
+- name: install apache2 Ubuntu
+  notify: 
+    - apt-get update
   notify:
     -apt-get upgrade
   apt: 
     name: apache2
     state: latest
+  when: ansible_os_family == "Debian"
+
+- name: install apache2 Mac
+  homebrew:
+    name: apache2
+    state: latest
+  when: ansible_os_family == "Darwin"
 
 - name: change config location
   shell: sudo sed -i "s/Options Indexes FollowSymLinks/Options FollowSymLinks/" /etc/apache2/apache2.conf
