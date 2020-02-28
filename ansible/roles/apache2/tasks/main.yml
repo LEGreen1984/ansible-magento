@@ -1,0 +1,31 @@
+---
+# - name: updates and upgrades apt
+#   notify: 
+#     - apt-get update
+
+- name: install apache2
+  # notify: 
+  #   - apt-get update
+  notify:
+    -apt-get upgrade
+  apt: 
+    name: apache2
+    state: latest
+
+- name: change config location
+  shell: sudo sed -i "s/Options Indexes FollowSymLinks/Options FollowSymLinks/" /etc/apache2/apache2.conf
+
+- name: stop apache2
+  systemd: 
+    state: stopped
+    name: apache2
+
+- name: start apache2
+  systemd:
+    state: started
+    name: apache2
+
+- name: enable apache2
+  systemd:
+    state: enabled
+    name: apache2

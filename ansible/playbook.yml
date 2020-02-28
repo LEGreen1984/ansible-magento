@@ -1,0 +1,6 @@
+---
+- name: Install magento 
+  hosts: magentohost
+  connection: local
+  roles: 
+    - roles/apache2
